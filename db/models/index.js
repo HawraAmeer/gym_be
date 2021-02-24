@@ -46,4 +46,16 @@ db.Sequelize = Sequelize;
 db.Gym.hasMany(db.Class, { foreignKey: "gymId", as: "classes" });
 db.Class.belongsTo(db.Gym, { foreignKey: "gymId", as: "gym" });
 
+db.User.belongsToMany(db.Class, {
+  through: "User_Class",
+  as: "classes",
+  foreignKey: "userId",
+});
+
+db.Class.belongsToMany(db.User, {
+  through: "User_Class",
+  as: "users",
+  foreignKey: "classId",
+});
+
 module.exports = db;
