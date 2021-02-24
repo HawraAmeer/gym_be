@@ -6,7 +6,7 @@ const passport = require("passport");
 const { localStrategy, jwtStrategy } = require("./middlewares/passport.js");
 const userRoutes = require("./routes/users");
 const gymRoutes = require("./routes/gyms");
-// const donutRoutes = require("./routes/donuts");
+const classRoutes = require("./routes/classes");
 
 const app = express();
 
@@ -21,7 +21,7 @@ app.use("/media", express.static(path.join(__dirname, "media")));
 
 app.use(userRoutes);
 app.use("/gyms", gymRoutes);
-// app.use("/donuts", donutRoutes);
+app.use("/classes", classRoutes);
 
 app.use((req, res, next) => {
   next({ status: 404, message: "Path Not Found" });
