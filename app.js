@@ -25,9 +25,7 @@ app.use("/gyms", gymRoutes);
 app.use("/classes", classRoutes);
 app.use("/types", typeRoutes);
 
-app.use((req, res, next) => {
-  next({ status: 404, message: "Path Not Found" });
-});
+app.use((req, res, next) => next({ status: 404, message: "Path Not Found" }));
 
 app.use((err, req, res, next) => {
   res

@@ -50,6 +50,7 @@ exports.signin = (req, res) => {
 exports.updateUser = async (req, res, next) => {
   try {
     const updatedUser = await req.userUpdate.update(req.body);
+    if (req.body.class) updatedUser.addClass(req.body.class);
     res.status(201).json(updatedUser);
   } catch (error) {
     next(error);
