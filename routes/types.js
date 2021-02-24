@@ -14,11 +14,11 @@ router.param("typeId", async (req, res, next, typeId) => {
 
 router.get("/", controller.fetchTypes);
 
-router.post("/", upload.single("image"), controller.createType);
+router.post("/", controller.createType);
 
 router.get("/:typeId", controller.typeDetail);
 
-router.put("/:typeId", upload.single("image"), controller.updateType);
+router.put("/:typeId", controller.updateType);
 
 router.delete("/:typeId", controller.deleteType);
 

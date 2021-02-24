@@ -1,4 +1,5 @@
 const SequelizeSlugify = require("sequelize-slugify");
+const moment = require("moment");
 
 module.exports = (sequelize, DataTypes) => {
   const Class = sequelize.define("Class", {
@@ -24,12 +25,12 @@ module.exports = (sequelize, DataTypes) => {
     date: {
       type: DataTypes.STRING,
       allowNull: false,
-      validate: { isAfter: Date.now() + 86400000 },
+      validate: { isAfter: moment().format("L") },
     },
     time: {
       type: DataTypes.STRING,
       allowNull: false,
-      validate: { isAfter: Date.now() + 86400000 },
+      validate: { isAfter: moment().add(23, "hours").format("LT") },
     },
     image: { type: DataTypes.STRING, allowNull: false },
   });

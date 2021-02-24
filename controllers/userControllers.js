@@ -51,7 +51,7 @@ exports.updateUser = async (req, res, next) => {
   try {
     const updatedUser = await req.userUpdate.update(req.body);
     if (req.body.class) updatedUser.addClass(req.body.class);
-    res.status(201).json(updatedUser);
+    res.status(201).json({ message: "User was updated" });
   } catch (error) {
     next(error);
   }
