@@ -14,6 +14,13 @@ router.param("typeId", async (req, res, next, typeId) => {
 
 router.get("/", controller.fetchTypes);
 
+router.post(
+  "/",
+  passport.authenticate("jwt", { session: false }),
+  upload.single("image"),
+  controller.createType
+);
+
 router.get("/:typeId", controller.typeDetail);
 
 router.put(

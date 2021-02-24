@@ -24,6 +24,15 @@ exports.fetchTypes = async (req, res, next) => {
   }
 };
 
+exports.createType = async (req, res, next) => {
+  try {
+    const newType = await Type.create(req.body);
+    res.status(201).json(newType);
+  } catch (error) {
+    next(error);
+  }
+};
+
 exports.typeDetail = async (req, res, next) => {
   res.json(req.type);
 };

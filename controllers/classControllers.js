@@ -11,7 +11,7 @@ exports.fetchClass = async (classId, next) => {
 exports.fetchClasses = async (req, res, next) => {
   try {
     const classes = await Class.findAll({
-      attributes: { exclude: ["gymId", "createdAt", "updatedAt"] },
+      attributes: { exclude: ["gymId", "typeId", "createdAt", "updatedAt"] },
       include: [
         {
           model: Gym,
