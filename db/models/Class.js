@@ -39,15 +39,3 @@ module.exports = (sequelize, DataTypes) => {
   });
   return Class;
 };
-
-/* 
-Your Class model should have the following fields (you can have other fields as well): 
-
-- name
-- number of seats
-- booked seats
-- price
-- type (cardio, weights,….). Note: type is a model <<<<<<<<<<<<<<<<
-- date  
-- time
-*/

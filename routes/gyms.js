@@ -9,7 +9,7 @@ router.param("gymId", async (req, res, next, gymId) => {
   if (foundGym) {
     req.gym = foundGym;
     next();
-  } else next({ status: 404, message: "Shop Not Found." });
+  } else next({ status: 404, message: "Gym Not Found" });
 });
 
 router.get("/", controller.fetchGyms);

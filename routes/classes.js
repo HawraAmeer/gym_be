@@ -9,7 +9,7 @@ router.param("classId", async (req, res, next, classId) => {
   if (foundClass) {
     req.class = foundClass;
     next();
-  } else next({ status: 404, message: "Donut Not Found." });
+  } else next({ status: 404, message: "Class Not Found" });
 });
 
 router.get("/", controller.fetchClasses);
