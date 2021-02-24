@@ -6,13 +6,11 @@ module.exports = (sequelize, DataTypes) => {
     slug: { type: DataTypes.STRING, unique: true },
     numOfSeats: {
       type: DataTypes.INTEGER,
-      allowNull: false,
       defaultValue: 10,
       validate: { min: 5 },
     },
     bookedSeats: {
       type: DataTypes.INTEGER,
-      allowNull: false,
       defaultValue: 0,
       validate: {
         max(value) {
@@ -26,12 +24,12 @@ module.exports = (sequelize, DataTypes) => {
     date: {
       type: DataTypes.STRING,
       allowNull: false,
-      validate: { isAfter: Date.now() },
+      validate: { isAfter: Date.now() + 86400000 },
     },
     time: {
       type: DataTypes.STRING,
       allowNull: false,
-      validate: { isAfter: Date.now() },
+      validate: { isAfter: Date.now() + 86400000 },
     },
     image: { type: DataTypes.STRING, allowNull: false },
   });
