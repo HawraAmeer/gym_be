@@ -16,17 +16,8 @@ router.get("/", controller.fetchClasses);
 
 router.get("/:classId", controller.classDetail);
 
-router.put(
-  "/:classId",
-  passport.authenticate("jwt", { session: false }),
-  upload.single("image"),
-  controller.updateClass
-);
+router.put("/:classId", upload.single("image"), controller.updateClass);
 
-router.delete(
-  "/:classId",
-  passport.authenticate("jwt", { session: false }),
-  controller.deleteClass
-);
+router.delete("/:classId", controller.deleteClass);
 
 module.exports = router;

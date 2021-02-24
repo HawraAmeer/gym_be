@@ -14,12 +14,7 @@ router.param("gymId", async (req, res, next, gymId) => {
 
 router.get("/", controller.fetchGyms);
 
-router.post(
-  "/",
-  passport.authenticate("jwt", { session: false }),
-  upload.single("image"),
-  controller.createGym
-);
+router.post("/", upload.single("image"), controller.createGym);
 
 router.get("/:gymId", controller.gymDetail);
 
@@ -27,11 +22,6 @@ router.put("/:gymId", upload.single("image"), controller.updateGym);
 
 router.delete("/:gymId", controller.deleteGym);
 
-router.post(
-  "/:gymId/classes",
-  passport.authenticate("jwt", { session: false }),
-  upload.single("image"),
-  controller.createClass
-);
+router.post("/:gymId/classes", upload.single("image"), controller.createClass);
 
 module.exports = router;
