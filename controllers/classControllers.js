@@ -1,4 +1,4 @@
-const { Class, Gym } = require("../db/models");
+const { Class, Gym, Type } = require("../db/models");
 
 exports.fetchClass = async (classId, next) => {
   try {
@@ -12,11 +12,18 @@ exports.fetchClasses = async (req, res, next) => {
   try {
     const classes = await Class.findAll({
       attributes: { exclude: ["gymId", "createdAt", "updatedAt"] },
-      include: {
-        model: Gym,
-        as: "gym",
-        attributes: ["id", "name", "slug", "image"],
-      },
+      include: [
+        {
+          model: Gym,
+          as: "gym",
+          attributes: ["id", "name", "slug", "image"],
+        },
+        {
+          model: Type,
+          as: "type",
+          attributes: ["id", "name"],
+        },
+      ],
     });
     res.json(classes);
   } catch (error) {

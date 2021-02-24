@@ -12,11 +12,11 @@ exports.fetchTypes = async (req, res, next) => {
   try {
     const types = await Type.findAll({
       attributes: { exclude: ["createdAt", "updatedAt"] },
-      //   include: {
-      //     model: Class,
-      //     as: "classes",
-      //     attributes: ["id"],
-      //   },
+      include: {
+        model: Class,
+        as: "classes",
+        attributes: ["id"],
+      },
     });
     res.json(types);
   } catch (error) {

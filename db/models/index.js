@@ -58,4 +58,7 @@ db.Class.belongsToMany(db.User, {
   foreignKey: "classId",
 });
 
+db.Type.hasMany(db.Class, { foreignKey: "typeId", as: "classes" });
+db.Class.belongsTo(db.Type, { foreignKey: "typeId", as: "type" });
+
 module.exports = db;
