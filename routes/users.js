@@ -8,7 +8,7 @@ router.param("userId", async (req, res, next, userId) => {
   if (foundUser) {
     req.userUpdate = foundUser;
     next();
-  } else next({ status: 404, message: "Shop Not Found." });
+  } else next({ status: 404, message: "User Not Found" });
 });
 
 router.post("/signup", controller.signup);
