@@ -30,7 +30,6 @@ module.exports = (sequelize, DataTypes) => {
     time: {
       type: DataTypes.STRING,
       allowNull: false,
-      validate: { isAfter: moment().add(23, "hours").format("LT") },
     },
     image: { type: DataTypes.STRING, allowNull: false },
   });

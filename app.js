@@ -40,3 +40,6 @@ db.sequelize.sync({ alter: true });
 app.listen(8000, () => {
   console.log("The application is running on localhost:8000");
 });
+
+// users fetch & users update
+// authenticate routes
