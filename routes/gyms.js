@@ -27,11 +27,11 @@ router.put("/:gymId", upload.single("image"), controller.updateGym);
 
 router.delete("/:gymId", controller.deleteGym);
 
-// router.post(
-//   "/:gymId/donuts",
-//   passport.authenticate("jwt", { session: false }),
-//   upload.single("image"),
-//   createDonut
-// );
+router.post(
+  "/:gymId/classes",
+  passport.authenticate("jwt", { session: false }),
+  upload.single("image"),
+  controller.createClass
+);
 
 module.exports = router;

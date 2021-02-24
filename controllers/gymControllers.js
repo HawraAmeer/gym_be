@@ -1,4 +1,4 @@
-const { Gym } = require("../db/models");
+const { Class, Gym } = require("../db/models");
 
 exports.fetchGym = async (gymId, next) => {
   try {
@@ -12,11 +12,11 @@ exports.fetchGyms = async (req, res, next) => {
   try {
     const gyms = await Gym.findAll({
       attributes: { exclude: ["createdAt", "updatedAt"] },
-      //   include: {
-      //     model: Donut,
-      //     as: "donuts",
-      //     attributes: ["id"],
-      //   },
+      include: {
+        model: Class,
+        as: "classes",
+        attributes: ["id"],
+      },
     });
     res.json(gyms);
   } catch (error) {
@@ -29,7 +29,6 @@ exports.createGym = async (req, res, next) => {
     if (req.file) {
       req.body.image = `http://${req.get("host")}/media/${req.file.filename}`;
     }
-    // req.body.userId = req.user.id;
     const newGym = await Gym.create(req.body);
     res.status(201).json(newGym);
   } catch (error) {
@@ -62,27 +61,15 @@ exports.deleteGym = async (req, res, next) => {
   }
 };
 
-// exports.createDonut = async (req, res, next) => {
-//   try {
-//     const foundGym = await Gym.findByPk(req.Gym.id);
-//     if (!foundGym) {
-//       const err = new Error("Create a Gym first!");
-//       err.status = 401;
-//       next(err);
-//     }
-//     if (foundGym.userId !== req.user.id) {
-//       const err = new Error("You are not the owner, you can't add products.");
-//       err.status = 401;
-//       next(err);
-//     }
-
-//     req.body.gymId = req.Gym.id;
-//     if (req.file) {
-//       req.body.image = `http://${req.get("host")}/media/${req.file.filename}`;
-//     }
-//     const newDonut = await Donut.create(req.body);
-//     res.status(201).json(newDonut);
-//   } catch (error) {
-//     next(error);
-//   }
-// };
+exports.createClass = async (req, res, next) => {
+  try {
+    req.body.gymId = req.gym.id;
+    if (req.file) {
+      req.body.image = `http://${req.get("host")}/media/${req.file.filename}`;
+    }
+    const newClass = await Class.create(req.body);
+    res.status(201).json(newClass);
+  } catch (error) {
+    next(error);
+  }
+};
