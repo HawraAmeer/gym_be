@@ -19,6 +19,12 @@ router.post(
   controller.signin
 );
 
+router.get("/", controller.fetchUsers);
+
+router.get("/:userId", controller.userDetail);
+
 router.put("/:userId", controller.updateUser);
+
+router.put("/:userId/class", controller.deleteBooking);
 
 module.exports = router;

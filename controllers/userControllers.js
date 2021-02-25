@@ -1,11 +1,19 @@
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const { JWT_SECRET, JWT_EXPIRATION_MS } = require("../config/keys");
-const { User } = require("../db/models");
+const { Class, User } = require("../db/models");
 
 exports.fetchUser = async (userId, next) => {
   try {
-    return await User.findByPk(userId);
+    return await User.findOne({
+      where: { id: userId },
+      attributes: { exclude: ["password", "createdAt", "updatedAt"] },
+      include: {
+        model: Class,
+        as: "classes",
+        attributes: ["id", "name", "price", "date", "time", "image"],
+      },
+    });
   } catch (error) {
     next(error);
   }
@@ -47,11 +55,45 @@ exports.signin = (req, res) => {
   res.json({ token });
 };
 
+exports.fetchUsers = async (req, res, next) => {
+  try {
+    const users = await User.findAll({
+      attributes: { exclude: ["password", "createdAt", "updatedAt"] },
+      include: {
+        model: Class,
+        as: "classes",
+        attributes: ["id", "name", "price", "date", "time", "image"],
+      },
+    });
+    res.json(users);
+  } catch (error) {
+    next(error);
+  }
+};
+
+exports.userDetail = (req, res, next) => {
+  res.json(req.userUpdate);
+};
+
 exports.updateUser = async (req, res, next) => {
   try {
     const updatedUser = await req.userUpdate.update(req.body);
-    if (req.body.class) updatedUser.addClass(req.body.class);
-    res.status(201).json({ message: "User was updated" });
+    if (req.body.class) {
+      updatedUser.addClass(req.body.class);
+    }
+    res.status(201).json(updatedUser);
+  } catch (error) {
+    next(error);
+  }
+};
+
+exports.deleteBooking = async (req, res, next) => {
+  try {
+    const updatedUser = await req.userUpdate.update(req.body);
+    if (req.body.class) {
+      updatedUser.removeClass(req.body.class);
+    }
+    res.status(201).json(updatedUser);
   } catch (error) {
     next(error);
   }

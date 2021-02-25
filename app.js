@@ -20,7 +20,7 @@ passport.use(jwtStrategy);
 
 app.use("/media", express.static(path.join(__dirname, "media")));
 
-app.use(userRoutes);
+app.use("/users", userRoutes);
 app.use("/gyms", gymRoutes);
 app.use("/classes", classRoutes);
 app.use("/types", typeRoutes);
@@ -41,5 +41,4 @@ app.listen(8000, () => {
   console.log("The application is running on localhost:8000");
 });
 
-// users fetch & users update
 // authenticate routes
